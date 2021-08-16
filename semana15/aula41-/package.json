@@ -1,0 +1,12 @@
+{
+  "name": "semana15",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "clear && node ./src/template-node-npm/Exercicio1/exercicio1.js && node ./src/template-node-npm/Exercicio2/exercicio2.js && node ./src/template-node-npm/Exercicio3/exercicio3.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
