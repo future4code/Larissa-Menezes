@@ -1,0 +1,12 @@
+{
+  "name": "Exercicio3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "exercicio3.js",
+  "scripts": {
+    "start": "clear && node ..src/template-node-npm/Exercicio3/exercicio3.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
