@@ -1,0 +1,94 @@
+*##exercicio 1*
+
+*a) Tambem pode ser chamada de Foreign Key, e serve para associar duas tabelas, colocando a primary key de uma 
+tabela na outra. Ela impede que ocorra a exclusão de dados, sem que antes exclua da tabela de origem e que adicione 
+um valor invalido no ID de uma tabela.
+
+*b)INSERT INTO Rating (id, comment, rate, movie_id) 
+VALUES (
+    "001",
+    "Esse filme é maravilhoso, recomendo assistir",
+    7,
+    "002"
+);
+
+INSERT INTO Rating (id, comment, rate, movie_id) 
+VALUES (
+	"001",
+    "Esse filme é incrivel!!!",
+     10,
+	"003"
+);
+
+INSERT INTO Rating (id, comment, rate, movie_id) 
+VALUES (
+	"001",
+    "Espetacular!!!",
+     10,
+	"004"
+);
+
+*c)--Código de erro: 1452. Não é possível adicionar ou atualizar uma linha filha: uma restrição de chave estrangeira 
+falha (`molina-2136017-larissa-menezes` `Rating`, CONSTRAINT` Rating_ibfk_1` FOREIGN KEY (`movie_id`) REFERÊNCIAS
+` Movie` (` id`)). 
+
+--este erro aconteceu porque não existe uma primary key para relacionar com uma chave estrangeira e assim criar uma
+nova linha na nova tabela.
+
+*d)ALTER TABLE Movie DROP COLUMN avaliação;
+
+*##exercicio2*
+
+*a) esta tabela cria uma relação entre a tabela de atores e de filmes, e diz de qual filme ele participou.
+
+*b)INSERT INTO MovieCast(movie_id, actor_id)
+VALUES(
+	"002",
+    "003"
+);
+
+INSERT INTO MovieCast(movie_id, actor_id)
+VALUES(
+	"003",
+    "005"
+);
+
+INSERT INTO MovieCast(movie_id, actor_id)
+VALUES(
+	"004",
+    "006"
+);
+
+INSERT INTO MovieCast(movie_id, actor_id)
+VALUES(
+    "004",
+    "003"
+);
+
+INSERT INTO MovieCast(movie_id, actor_id)
+VALUES(
+	"003",
+    "005"
+);
+
+INSERT INTO MovieCast(movie_id, actor_id)
+VALUES(
+	"001",
+    "007"
+);
+
+*c)-- Código de erro: 1452. Não é possível adicionar ou atualizar uma linha filha: uma restrição de chave estrangeira 
+falha (`molina-2136017-larissa-menezes``MovieCast`, CONSTRAINT` MovieCast_ibfk_1` FOREIGN KEY (`movie_id`)
+ REFERÊNCIAS` Movie` (` id`)).
+   -- Não foi possivel localizar uma chave primaria para estes dados, assim não tem como relacionar a chave estrangeira, 
+por isso ocorreu este erro ocorreu.
+
+*##exercicio3*
+
+*a)-- O operador ON junta e exibe duas tabelas, nesse caso as tabelas Movie e Rating que foram unidas.
+
+*b)?? 
+
+
+
+
