@@ -1,0 +1,238 @@
+*##exercicio 1*
+
+*a) ate o fim da questão
+
+CREATE TABLE Actor (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR (255) NOT NULL,
+    salary FLOAT NOT NULL,
+    birth_date DATE NOT NULL,
+    gender VARCHAR(6) NOT NULL
+);
+-- Nessa query foi usando o "create table" para criar uma tabela, o "varchar"
+-- para limitar o numero de caracteres para 255, o "not null" para informar que o valor
+-- não é nulo, e o "date" para solicitar a data de nascimento do ator. "A primary key" é
+-- usada para fixar que aquela é a primeira coluna.
+
+SHOW databases;
+-- O comando "Show database" mostra informações dos schemas do banco de dados.
+
+SHOW tables;
+-- O comando "Show tables mostra todas as tabelas do banco de dados que se esta usando.
+
+DESCRIBE Actor;
+-- "O comando "Describe actor mostra todos os dados da tabela actor.
+
+*##exercicio 2*
+
+*a) ate o fim da questão
+
+INSERT INTO Actor (id, name, salary, birth_date, gender)
+VALUES(
+  "001", 
+  "Tony Ramos",
+  400000,
+  "1948-08-25", 
+  "male"
+);
+
+INSERT INTO Actor (id, name, salary, birth_date, gender)
+VALUES(
+  "002", 
+  "Gloria Pires",
+  1200000,
+  "1963-08-23",
+  "female"
+);
+
+INSERT INTO Actor (id, name, salary, birth_date, gender)
+VALUES(
+  "002", 
+  "Antonio Fagundes",
+  1200000,
+  "1963-04-12",
+  "male"
+);
+
+-- Código de erro: 1062. Entrada duplicada '002' para a chave 'PRIMARY'
+-- Este erro aconteceu porque a chave primaria "002" ja estava preenchida.
+
+INSERT INTO Actor (id, name, salary)
+VALUES(
+  "003", 
+  "Fernanda Montenegro",
+  300000,
+  "1929-10-19", 
+  "female"
+);
+-- Código de erro: 1136. A contagem de colunas não corresponde à contagem de valores na linha 1
+-- Este erro aconteceu porque as colunas birth_date e gender não foram colocadas no comando da query.
+
+INSERT INTO Actor (id, name, salary, birth_date, gender)
+VALUES(
+  "003", 
+  "Fernanda Montenegro",
+  300000,
+  "1929-10-19", 
+  "female"
+);
+
+INSERT INTO Actor (id, salary, birth_date, gender)
+VALUES(
+  "004",
+  400000,
+  "1949-04-18", 
+  "male"
+);
+-- Código de erro: 1364. O campo 'nome' não tem um valor padrão
+-- Este erro aconteceu porque faltou colocar a coluna "name" em valores.
+
+INSERT INTO Actor (id, name, salary, birth_date, gender)
+VALUES(
+  "Marco Nanini",
+  "004",
+  400000,
+  "1948-05-31", 
+  "male"
+);
+
+INSERT INTO Actor (id, name, salary, birth_date, gender)
+VALUES(
+  "005", 
+  "Juliana Paes",
+  719333.33,
+  "1979-03-26",
+  "female"
+);
+-- Código de erro: 1292. Valor de data incorreto: '1950' para a coluna 'birth_date' na linha 1
+-- A data de aniversario estava em um formato incorreto.alter
+
+INSERT INTO Actor (id, name, salary, birth_date, gender)
+VALUES(
+  "006", 
+  "Eliane Giardini",
+  907843,
+  "1952-10-20", 
+  "female"
+);
+
+INSERT INTO Actor (id, name, salary, birth_date, gender)
+VALUES(
+  "007", 
+  "Cassia Kis",
+  1000000,
+  "1958-01-06", 
+  "female"
+);
+
+*##exercicio 3*
+
+*a) ate o fim da questão
+
+SELECT id, name, salary, birth_date from Actor WHERE gender = "female";
+
+SELECT salary from Actor WHERE name = "Tony Ramos";
+
+SELECT * from Actor WHERE gender = "invalid";
+-- Não retornou nenhum valor porque todos os campos da tabela estão preenchidos.
+
+SELECT id, name, salary from Actor WHERE salary >500000;
+
+SELECT id, nome from Actor WHERE id = "002";
+--Código de erro: 1054. Coluna desconhecida 'nome' na 'lista de campos'
+-- este erro ocorreu porque a coluna se chama "name" e não "nome"
+SELECT id, name from Actor WHERE id = "002";
+
+*##exercicio 4*
+
+*a) Na query foi usado o comparador Like para encontrar os atores que começam com as letras A ou J.
+Na sintaxe do SQL para procurarmos palavras iniciadas com alguma letra usamos " LIKE A%", portanto a
+query ficará assim:
+(inicio codigo)
+SELECT * FROM Actor
+WHERE (name LIKE "A%" OR name LIKE "J%")
+(fim codigo)
+Foi adicionado tambem um novo fator a query para saber se existem na tabela, atores com nomes que iniciam
+com a letra A ou J e que ganham acima de 300.000 reais. Portanto a query ficou asism:
+(inicio codigo)
+SELECT * FROM Actor
+WHERE (name LIKE "A%" OR name LIKE "J%") AND salary >300000 
+(fim codigo)
+
+
+*b) SELECT * FROM Actor
+WHERE (name NOT LIKE "A%") AND salary > 350000
+
+*c) SELECT * FROM Actor
+WHERE name LIKE "G%" OR "g%"
+
+*d) SELECT * FROM Actor
+WHERE (name LIKE "A%" OR name LIKE "a%" OR name LIKE "G%" OR name LIKE "g" ) AND BETWEEN salary 350000 AND 900000
+
+*##exercicio 5*
+
+*a)CREATE TABLE film (
+id VARCHAR(255) PRIMARY KEY,
+name VARCHAR(1500) NOT NULL,
+sinopse TEXT NOT NULL,
+data_de_lançamento DATE NOT NULL,
+avaliação INT NOT NULL
+);
+-- A query cria uma tabela chamada "film" que tem a coluna id com varchar(quantidade maxima de caracteres) 255, sendo a primary key (chave primaria unica para cada item).
+A coluna Name com varchar de 1500 e NOT NULL (não pode ter valor nulo). A coluna sinopse com o comando TEXT, que libera a quantidade maxima de caracteres, e tambem não pode
+ser nula. A coluna data_de_lançamento com um valor numerico do tipo DATE e que não pode ser nulo. E por fim, a coluna avaliação to tipo INT (numeros inteiros), que guardará
+a nota de avaliação do filme. 
+
+*b) ate o fim da questão
+INSERT INTO film (id, name, sinopse, data_de_lançamento, avaliação)
+VALUES(
+"001",
+"Se Eu Fosse Você",
+"Cláudio e Helena são casados há muitos anos e enfrentam a rotina do casamento. Um dia eles são atingidos por um fenômeno inexplicável e trocam de corpos",
+"2006-01-06",
+"7"
+);
+
+INSERT INTO film (id, name, sinopse, data_de_lançamento, avaliação)
+VALUES(
+"002",
+"Doce de mãe",
+"Dona Picucha, uma animada senhora de 85 anos, sempre causa grandes confusões. A vida dela e dos seus quatro filhos sofre uma reviravolta depois que Zaida, empregada e amiga de Dona Picucha, anuncia que vai se casar e não poderá mais morar com ela",
+"2012-12-27",
+"10"
+);
+
+INSERT INTO film (id, name, sinopse, data_de_lançamento, avaliação)
+VALUES(
+"003",
+"Dona Flor e Seus Dois Maridos",
+"Dona Flor é uma sedutora professora de culinária casada com Vadinho, que só quer saber de farras e jogatina nas boates. A vida de abusos acaba por acarretar sua morte precoce.",
+"2017-11-02",
+"8"
+);
+
+INSERT INTO film (id, name, sinopse, data_de_lançamento, avaliação)
+VALUES(
+"004",
+"Elis",
+"O filme retrata a vida intensa da consagrada cantora Elis Regina, desde quando sua carreira se iniciou e, aos 18 anos",
+"2016-11-24",
+"8"
+);
+
+*##exercicio 6*
+
+*a) SELECT id, titulo, avaliação from film WHERE id = "004"
+
+*b) SELECT * FROM film WHERE name = "Elis";
+
+*c) SELECT id, name, sinopse from film WHERE avaliação >=7;
+
+*##exercicio 7*
+
+*a) SELECT * FROM film WHERE name LIKE "%vida%";
+*b) SELECT * FROM film WHERE name LIKE "%DOIS%" OR sinopse LIKE "%SE%";
+*c) SELECT * FROM film WHERE data_de_lançamento < "2021-01-01";
+*d) SELECT * FROM film WHERE data_de_lançamento < "2021-01-01" AND 
+      (name LIKE "%DONA%" OR
+      sinopse LIKE "%VOCÊ%") AND avaliação > 7;
